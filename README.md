@@ -79,13 +79,3 @@ frontend/src/
 ├── lib/api.ts      typed client
 └── pages/          FindingDetail.tsx · RerunProof.tsx
 ```
-
-## Status and limitations
-
-The core logic — fingerprinting, diffing, the state machine, triage validation — is implemented. Wiring it into a running service is unfinished:
-
-- **No FastAPI application object** includes the routers, and there's no dependency file or frontend build setup.
-- **Not all documented endpoints exist yet:** `POST /repos` and the paginated `GET /findings` list are described in [ARCHITECTURE.md](ARCHITECTURE.md) but not implemented.
-- **Triage isn't connected.** `triage/stage.py` imports `SYSTEM_TRIAGE` from `triage/llm.py`, but it's defined in `triage/prompts.py`, so the module fails to import; nothing calls `triage_scan` after a scan completes.
-- Only a Semgrep adapter exists; the frontend has two pages and no app shell.
-- No automated tests beyond the fingerprint self-check.
